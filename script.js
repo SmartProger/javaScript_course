@@ -14,18 +14,29 @@ let rollback = 20;
 let fullPrice = screenPrice + servicePrice1 + servicePrice2;
 let servicePercentPrice = Math.round((fullPrice * (100 - rollback)) / 100);
 
-if (fullPrice >= 30000) {
-  console.log("Даём скидку 10%");
-} else if (fullPrice >= 15000 && fullPrice < 30000) {
-  console.log("Даём скидку 5%");
-} else if (fullPrice > 0 && fullPrice < 15000) {
-  console.log("Даём скидку 5%");
-} else if (fullPrice <= 0) {
-  console.log("Что-то пошло не так");
-}
+const showTypeOf = function (variable) {
+  console.log(variable, typeof variable);
+};
 
-console.log("услуга " + service1 + " будет стоить " + servicePrice1);
-console.log("услуга " + service2 + " будет стоить " + servicePrice2);
+const getRollbackMessage = function (price) {
+  if (price >= 30000) {
+    return "Даём скидку 10%";
+  } else if (price >= 15000 && price < 30000) {
+    return "Даём скидку 5%";
+  } else if (price > 0 && price < 15000) {
+    return "Скидка не предусмотрена";
+  } else {
+    return "Что-то пошло не так";
+  }
+};
+
+showTypeOf(title);
+showTypeOf(screenPrice);
+showTypeOf(adaptive);
+
+console.log(getRollbackMessage(fullPrice));
+
+console.log(screens.length);
 console.log(servicePercentPrice);
 
 /* end lesson03 */
