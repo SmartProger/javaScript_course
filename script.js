@@ -18,11 +18,10 @@ const isNumber = function (num) {
 const asking = function () {
   title = prompt("Как называется ваш проект?", "Калькулятор вёрстки");
   screens = prompt("Какие типы экранов нужно разработать?", "Простые, сложные");
-  screenPrice = prompt("Сколько будет стоить данная работа?");
 
-  while (!isNumber(screenPrice)) {
+  do {
     screenPrice = prompt("Сколько будет стоить данная работа?");
-  }
+  } while (!isNumber(screenPrice));
 
   adaptive = confirm("Нужен ли адаптив на сайте?");
 };
