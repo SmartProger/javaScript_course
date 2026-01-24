@@ -1,19 +1,46 @@
-const title = "javascript_course";
-const screens = "Простые, Сложные, Интерактивные";
-let screenPrice = 20000;
-let rollback = 15;
-let fullPrice = 100_000; // удобный формат записи больших чисел :)
-let adaptive = true;
+"use strict";
 
-console.log(typeof title);
-console.log(typeof fullPrice);
-console.log(typeof adaptive);
+let rollback = 20;
+let adaptive;
 
-console.log(screens.length);
+alert("Hello, JS!");
+console.log("Here we go!");
 
-console.log("Стоимость вёрстки экрана: " + screenPrice + " руб");
-console.log("Стоимость разработки сайта: " + fullPrice + " руб");
+/* lesson03 */
 
-console.log(screens.toLowerCase().split(", "));
+let title = prompt("Как называется ваш проект?");
+console.log(title);
 
-console.log("Процент посреднику: " + fullPrice * (rollback / 100) + " руб");
+let screens = prompt("Какие типы экранов нужно разработать?");
+console.log(screens);
+
+let screenPrice = +prompt("Сколько будет стоить данная работа?", "12000");
+console.log(screenPrice);
+
+let service1 = prompt("Какой дополнительный тип услуги нужен?");
+let servicePrice1 = +prompt("Сколько это будет стоить?");
+
+let service2 = prompt("Какой дополнительный тип услуги нужен?");
+let servicePrice2 = +prompt("Сколько это будет стоить?");
+
+console.log("услуга " + service1 + " будет стоить " + servicePrice1);
+
+console.log("услуга " + service2 + " будет стоить " + servicePrice2);
+
+let fullPrice = screenPrice + servicePrice1 + servicePrice2;
+
+let servicePercentPrice = Math.round((fullPrice * (100 - rollback)) / 100);
+
+console.log(servicePercentPrice);
+
+if (fullPrice >= 30000) {
+  console.log("Даём скидку 10%");
+} else if (fullPrice >= 15000 && fullPrice < 30000) {
+  console.log("Даём скидку 5%");
+} else if (fullPrice > 0 && fullPrice < 15000) {
+  console.log("Даём скидку 5%");
+} else if (fullPrice <= 0) {
+  console.log("Что-то пошло не так");
+}
+
+/* end lesson03 */
