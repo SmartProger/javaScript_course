@@ -11,13 +11,21 @@ const appData = {
   servicePercentPrice: 0,
   service1: "",
   service2: "",
+  start: function () {
+    appData.asking();
+    appData.allServicePrices = appData.getAllServicePrices();
+    appData.fullPrice = appData.getFullPrice();
+    appData.servicePercentPrice = appData.getServicePercentPrice();
+    appData.title = appData.getTitle();
+    appData.logger();
+  },
   asking: function () {
     appData.title = prompt("Как называется ваш проект?", "Калькулятор вёрстки");
     appData.screens = prompt("Какие типы экранов нужно разработать?", "Простые, сложные");
 
     do {
       appData.screenPrice = prompt("Сколько будет стоить данная работа?");
-    } while (!isNumber(appData.screenPrice));
+    } while (!appData.isNumber(appData.screenPrice));
 
     appData.adaptive = confirm("Нужен ли адаптив на сайте?");
   },
@@ -37,7 +45,7 @@ const appData = {
       }
       do {
         servicePrice = prompt("Сколько это будет стоить?");
-      } while (!isNumber(servicePrice));
+      } while (!appData.isNumber(servicePrice));
 
       sum += +servicePrice;
     }
@@ -64,13 +72,14 @@ const appData = {
       return "Что-то пошло не так";
     }
   },
+  logger: function () {
+    console.log(appData.fullPrice);
+    console.log(appData.servicePercentPrice);
+
+    for (let key in appData) {
+      console.log(key + " => " + appData[key]);
+    }
+  },
 };
 
-appData.asking();
-appData.allServicePrices = getAllServicePrices();
-appData.fullPrice = getFullPrice();
-appData.servicePercentPrice = getServicePercentPrice();
-appData.title = getTitle();
-
-console.log(appData.fullPrice);
-console.log(appData.servicePercentPrice);
+appData.start();
