@@ -19,23 +19,31 @@ const appData = {
     appData.logger();
   },
   asking: function () {
-    appData.title = prompt("Как называется ваш проект?", "Калькулятор вёрстки");
+    do {
+      appData.title = prompt("Как называется ваш проект?", "Калькулятор вёрстки");
+    } while (appData.isNumber(appData.title));
 
     for (let i = 0; i < 2; i++) {
-      let name = prompt("Какие типы экранов нужно разработать?");
-      let price = 0;
+      let screenName = "";
+      do {
+        screenName = prompt("Какие типы экранов нужно разработать?");
+      } while (appData.isNumber(screenName));
 
+      let price = 0;
       do {
         price = prompt("Сколько будет стоить данная работа?");
       } while (!appData.isNumber(price));
 
-      appData.screens.push({id: i, name: name, price: price});
+      appData.screens.push({id: i, name: screenName, price: +price});
     }
 
     for (let i = 0; i < 2; i++) {
-      let name = prompt("Какой дополнительный тип услуги нужен?");
-      let price = 0;
+      let serviceName = "";
+      do {
+        serviceName = prompt("Какой дополнительный тип услуги нужен?");
+      } while (appData.isNumber(serviceName));
 
+      let price = 0;
       do {
         price = prompt("Сколько это будет стоить?");
       } while (!appData.isNumber(price));
