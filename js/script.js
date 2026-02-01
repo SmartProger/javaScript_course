@@ -24,6 +24,7 @@ let screens = document.querySelectorAll(".screen");
 const appData = {
   title: "",
   screens: [],
+  screensCount: 0,
   screenPrice: 0,
   adaptive: true,
   rollback: 10,
@@ -46,8 +47,8 @@ const appData = {
     appData.addScreens();
     appData.addServices();
     appData.addPrices();
-    // appData.logger();
     appData.showResult();
+    appData.logger();
   },
   showResult: function () {
     const selectedScreens = document.querySelectorAll(".screen select[name='views-select']");
@@ -85,6 +86,8 @@ const appData = {
         name: selectName,
         price: +select.value * +input.value,
       });
+
+      appData.screensCount += +input.value;
     });
   },
   addServices: function () {
@@ -133,23 +136,11 @@ const appData = {
       +appData.screenPrice + appData.servicePricesNumber + appData.servicePricesPercent;
 
     appData.servicePercentPrice = appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
-  },
-  getRollbackMessage: function (price) {
-    if (price >= 30000) {
-      return "Даём скидку 10%";
-    } else if (price >= 15000 && price < 30000) {
-      return "Даём скидку 5%";
-    } else if (price > 0 && price < 15000) {
-      return "Скидка не предусмотрена";
-    } else {
-      return "Что-то пошло не так";
-    }
+
+    totalCount.value = appData.screensCount;
   },
   logger: function () {
-    console.log(appData.fullPrice);
-    console.log(appData.servicePercentPrice);
-
-    console.log(appData.screens);
+    console.log(appData);
   },
 };
 
