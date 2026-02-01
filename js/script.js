@@ -18,7 +18,6 @@ const fullTotalCount = document.getElementsByClassName("total-input")[3];
 const totalCountRollback = document.getElementsByClassName("total-input")[4];
 
 let screens = document.querySelectorAll(".screen");
-
 const appData = {
   title: "",
   screens: [],
@@ -48,6 +47,24 @@ const appData = {
     appData.showResult();
   },
   showResult: function () {
+    const selectedScreens = document.querySelectorAll(".screen select[name='views-select']");
+    const selectedValues = document.querySelectorAll(".screen input[type='text']");
+    let required = 0;
+    selectedScreens.forEach(function (item) {
+      if (item.selectedIndex == 0) {
+        required += 1;
+      }
+    });
+    selectedValues.forEach(function (item) {
+      if (item.value == 0) {
+        required += 1;
+      }
+    });
+    if (required > 0) {
+      alert("Заполните все типы экранов и их количество!");
+      return;
+    }
+
     total.value = appData.screenPrice;
     totalCountOther.value = appData.servicePricesPercent + appData.servicePricesNumber;
     fullTotalCount.value = appData.fullPrice;
