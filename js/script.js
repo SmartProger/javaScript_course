@@ -46,7 +46,6 @@ const appData = {
     appData.addScreens();
     appData.addServices();
     appData.addPrices();
-    // appData.getServicePercentPrice();
     // appData.logger();
     appData.showResult();
   },
@@ -72,6 +71,7 @@ const appData = {
     total.value = appData.screenPrice;
     totalCountOther.value = appData.servicePricesPercent + appData.servicePricesNumber;
     fullTotalCount.value = appData.fullPrice;
+    totalCountRollback.value = appData.servicePercentPrice;
   },
   addScreens: function () {
     screens = document.querySelectorAll(".screen");
@@ -131,8 +131,7 @@ const appData = {
 
     appData.fullPrice =
       +appData.screenPrice + appData.servicePricesNumber + appData.servicePricesPercent;
-  },
-  getServicePercentPrice: function () {
+
     appData.servicePercentPrice = appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
   },
   getRollbackMessage: function (price) {
