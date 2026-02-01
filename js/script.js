@@ -17,6 +17,9 @@ const totalCountOther = document.getElementsByClassName("total-input")[2];
 const fullTotalCount = document.getElementsByClassName("total-input")[3];
 const totalCountRollback = document.getElementsByClassName("total-input")[4];
 
+const range = document.querySelector(".rollback input[type='range']");
+const rangeSpan = document.querySelector(".rollback .range-value");
+
 let screens = document.querySelectorAll(".screen");
 const appData = {
   title: "",
@@ -34,6 +37,7 @@ const appData = {
     appData.addTitle();
     startBtn.addEventListener("click", appData.start);
     buttonPlus.addEventListener("click", appData.addScreenBlock);
+    range.addEventListener("input", appData.changeRollback);
   },
   addTitle: function () {
     document.title = title.textContent;
@@ -103,6 +107,10 @@ const appData = {
         appData.servicesNumber[label.textContent] = +input.value;
       }
     });
+  },
+  changeRollback: function () {
+    rangeSpan.textContent = range.value + "%";
+    appData.rollback = range.value;
   },
   addScreenBlock: function () {
     const cloneScreen = screens[0].cloneNode(true);
