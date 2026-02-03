@@ -55,6 +55,7 @@ const appData = {
   showResult: function () {
     const selectedScreens = document.querySelectorAll(".screen select[name='views-select']");
     const selectedValues = document.querySelectorAll(".screen input[type='text']");
+
     let required = 0;
     selectedScreens.forEach((item) => {
       if (item.selectedIndex == 0) {
@@ -70,6 +71,16 @@ const appData = {
       alert("Заполните все типы экранов и их количество!");
       return;
     }
+
+    selectedScreens.forEach((item) => {
+      item.disabled = true;
+    });
+    selectedValues.forEach((item) => {
+      item.disabled = true;
+    });
+
+    startBtn.style.display = "none";
+    resetBtn.style.display = "block";
 
     total.value = this.screenPrice;
     totalCountOther.value = this.servicePricesPercent + this.servicePricesNumber;
