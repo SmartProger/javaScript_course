@@ -21,13 +21,16 @@ const range = document.querySelector(".rollback input[type='range']");
 const rangeSpan = document.querySelector(".rollback .range-value");
 
 let screens = document.querySelectorAll(".screen");
+
+const checks = document.querySelectorAll("input[type=checkbox]");
+
 const appData = {
   title: "",
   screens: [],
   screensCount: 0,
   screenPrice: 0,
   adaptive: true,
-  rollback: 10,
+  rollback: 0,
   servicePricesPercent: 0,
   servicePricesNumber: 0,
   fullPrice: 0,
@@ -37,6 +40,7 @@ const appData = {
   init: function () {
     this.addTitle();
     startBtn.addEventListener("click", this.start);
+    resetBtn.addEventListener("click", this.reset);
     buttonPlus.addEventListener("click", this.addScreenBlock);
     range.addEventListener("input", this.changeRollback);
   },
@@ -51,6 +55,50 @@ const appData = {
     appData.addPrices();
     appData.showResult();
     // appData.logger();
+  },
+  reset: function () {
+    resetBtn.style.display = "none";
+    startBtn.style.display = "block";
+
+    const screens = document.querySelectorAll(".screen");
+
+    screens.forEach((screen, key) => {
+      if (key > 0) {
+        screen.remove();
+      }
+      const select = screen.querySelector("select[name='views-select']");
+      select.disabled = false;
+      select.selectedIndex = 0;
+
+      const input = screen.querySelector("input[type='text']");
+      input.disabled = false;
+      input.value = "";
+    });
+
+    checks.forEach((checkBox) => {
+      checkBox.checked = false;
+    });
+
+    const totalInputs = document.querySelectorAll(".total-input");
+    totalInputs.forEach((input) => {
+      input.value = 0;
+    });
+
+    inputRange.value = 0;
+    inputRangeValue.textContent = "0%";
+
+    appData.title = "";
+    appData.screens = [];
+    appData.screensCount = 0;
+    appData.screenPrice = 0;
+    appData.adaptive = true;
+    appData.rollback = 0;
+    appData.servicePricesPercent = 0;
+    appData.servicePricesNumber = 0;
+    appData.fullPrice = 0;
+    appData.servicePercentPrice = 0;
+    appData.servicesPercent = {};
+    appData.servicesNumber = {};
   },
   showResult: function () {
     const selectedScreens = document.querySelectorAll(".screen select[name='views-select']");
@@ -89,6 +137,9 @@ const appData = {
   },
   addScreens: function () {
     screens = document.querySelectorAll(".screen");
+
+    // console.log(screens);
+
     screens.forEach((screen, index) => {
       const select = screen.querySelector("select");
       const input = screen.querySelector("input");
